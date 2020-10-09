@@ -1,0 +1,14 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: run-tests
+spec:
+  workspaces:
+    - name: task-ws
+      mountPath: /workspace/repo/
+  steps:
+    - name: run-go-tests
+      image: golang:1.14-alpine
+      workingDir: /workspace/repo/src
+      command: ["go"]
+      args: ["test"]
